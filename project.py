@@ -1,32 +1,16 @@
-
-import  string
+import rich
+#the check functions
+def has_lowerC(psw):
+    return any( char.islower() for char in psw)
 
 def has_digits(psw):
-    if any(char.isdigit() for char in psw):
-        return True
-    else :
-        return False
+    return any(char.isdigit() for char in psw)  
 
-
-
-def has_lowerC(psw):
-    if any( char.islower() for char in psw):
-        return True
-    else :
-        return False
-    
 def has_symbols(psw):
-    if any((not char.isalnum()and char!=" ") for char in psw):
-        return True
-    else :
-        return False
-
+    return any((not char.isalnum()) for char in psw)
 
 def has_upperC(psw):
-    if any( char.isupper() for char in psw):
-        return True
-    else :
-        return False
+    return any( char.isupper() for char in psw)
 
 def matched_criterions(psw):
     nbr=0
@@ -42,15 +26,26 @@ def matched_criterions(psw):
     
 
 def password_security(psw):
-    leaked={"password123","openme1234",}
+    leaked={"password123",
+    "openme1234",
+    "qwerty123",
+    "letmein123",
+    "welcome123",
+    "admin1234",
+    "iloveyou123",
+    "123456789",
+    "password1",
+    "changeme123",}
     score=matched_criterions(psw)
-    if (len(psw)<8)or(psw.lower() in leaked):
-        return "weak"
+    if (len(psw)<8)or (psw.lower() in leaked) or (" " in psw):
+        return "[bold red]weak[bold red]"
     elif ((score==1)or(score==0)or(score==2)):
-        return "weak"
+        return "[bold red]weak[bold red]"
     elif(score==3):
-        return "medium"
+        return "[yellow]medium[yellow]"
     elif (score==4):
-        return "strong"
+        return "[green]strong[green]"
 
-print (password_security("sir charji200")) 
+
+mdp=input ("entrez le mot de passe ")
+console.print (password_security(mdp)) 
